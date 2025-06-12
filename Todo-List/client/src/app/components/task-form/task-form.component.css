@@ -1,0 +1,59 @@
+.slds-modal__container {
+    max-width: 50rem !important;
+    width: 90% !important;
+}
+
+.slds-form-element__label {
+    margin-bottom: 0.25rem;
+}
+
+.slds-input,
+.slds-textarea,
+.slds-select {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ddb7b7;
+    border-radius: 0.25rem;
+}
+
+.slds-button_brand {
+    background-color: #0070d2;
+    color: #fff;
+}
+
+.slds-button_destructive {
+    background-color: #c23934;
+    color: #fff;
+}
+
+.slds-button_neutral {
+    background-color: #f3f3f3;
+    color: #181818;
+    border: 1px solid #d8dde6;
+}
+
+.slds-button_icon-border-filled {
+    border: 1px solid #d8dde6;
+    background-color: #fff;
+}
+
+.slds-button_icon-border-filled:hover {
+    border-color: #0070d2;
+}
+
+.slds-modal__footer {
+    text-align: right;
+}
+
+.slds-modal__footer .slds-button {
+    margin-left: 0.5rem;
+}
+
+.slds-list_horizontal dt {
+    width: 30%;
+    font-weight: bold;
+}
+
+.slds-list_horizontal dd {
+    width: 70%;
+} 

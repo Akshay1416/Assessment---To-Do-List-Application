@@ -1,0 +1,78 @@
+<div class="slds-scope">
+    <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-03" class="slds-modal slds-fade-in-open">
+        <div class="slds-modal__container">
+            <header class="slds-modal__header">
+                <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" (click)="onCancel()">
+                    <svg class="slds-button__icon slds-button__icon_large" aria-hidden="true">
+                        <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#close"></use>
+                    </svg>
+                    <span class="slds-assistive-text">Close</span>
+                </button>
+                <h2 id="modal-heading-03" class="slds-modal__title slds-hyphenate">{{ isEditMode ? 'Edit Task' : 'New Task' }}</h2>
+            </header>
+            <div class="slds-modal__content slds-p-around_medium">
+                <form>
+                    <div class="slds-form-element slds-m-bottom_medium">
+                        <label class="slds-form-element__label" for="task-title">Title</label>
+                        <div class="slds-form-element__control">
+                            <input type="text" id="task-title" class="slds-input" [(ngModel)]="editableTask.title" name="title" required>
+                        </div>
+                    </div>
+
+                    <div class="slds-form-element slds-m-bottom_medium">
+                        <label class="slds-form-element__label" for="task-assigned-to">Assigned To</label>
+                        <div class="slds-form-element__control">
+                            <div class="slds-select_container">
+                                <select id="task-assigned-to" class="slds-select" [(ngModel)]="editableTask.assignedTo" name="assignedTo" required>
+                                    <option *ngFor="let user of assignedUsers" [value]="user">{{ user }}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="slds-form-element slds-m-bottom_medium">
+                        <label class="slds-form-element__label" for="task-status">Status</label>
+                        <div class="slds-form-element__control">
+                            <div class="slds-select_container">
+                                <select id="task-status" class="slds-select" [(ngModel)]="editableTask.completed" name="completed" required>
+                                    <option [value]="false">In Progress</option>
+                                    <option [value]="true">Completed</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="slds-form-element slds-m-bottom_medium">
+                        <label class="slds-form-element__label" for="task-due-date">Due Date</label>
+                        <div class="slds-form-element__control">
+                            <input type="date" id="task-due-date" class="slds-input" [ngModel]="formatDate(editableTask.dueDate)" (ngModelChange)="editableTask.dueDate = parseDate($event)" name="dueDate" required>
+                        </div>
+                    </div>
+
+                    <div class="slds-form-element slds-m-bottom_medium">
+                        <label class="slds-form-element__label" for="task-priority">Priority</label>
+                        <div class="slds-form-element__control">
+                            <div class="slds-select_container">
+                                <select id="task-priority" class="slds-select" [(ngModel)]="editableTask.priority" name="priority" required>
+                                    <option *ngFor="let priority of priorities" [value]="priority">{{ priority }}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="slds-form-element slds-m-bottom_medium">
+                        <label class="slds-form-element__label" for="task-description">Description</label>
+                        <div class="slds-form-element__control">
+                            <textarea id="task-description" class="slds-textarea" [(ngModel)]="editableTask.description" name="description"></textarea>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <footer class="slds-modal__footer">
+                <button class="slds-button slds-button_neutral" (click)="onCancel()">Cancel</button>
+                <button class="slds-button slds-button_brand" (click)="onSave()">Save</button>
+            </footer>
+        </div>
+    </section>
+    <div class="slds-backdrop slds-backdrop_open"></div>
+</div> 

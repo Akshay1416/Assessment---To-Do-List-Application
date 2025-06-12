@@ -1,0 +1,84 @@
+<div class="slds-scope">
+  <div class="slds-m-around_medium">
+    <div class="slds-page-header">
+      <div class="slds-page-header__row">
+        <div class="slds-page-header__col-title">
+          <div class="slds-page-header__name">
+            <div class="slds-page-header__name-title">
+              <h1>
+                <span class="slds-page-header__title slds-truncate"
+                  title="Task Form"
+                  >{{ isEditMode ? 'Edit Task' : 'New Task' }}</span
+                >
+              </h1>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="slds-card slds-p-around_medium">
+      <form (ngSubmit)="saveTask()">
+        <div class="slds-form-element slds-m-bottom_medium">
+          <label class="slds-form-element__label" for="assignedTo">Assigned To</label>
+          <div class="slds-form-element__control">
+            <div class="slds-select_container">
+              <select id="assignedTo" class="slds-select" [(ngModel)]="task.assignedTo" name="assignedTo" required>
+                <option value="">--Select User--</option>
+                <option value="User 1">User 1</option>
+                <option value="User 2">User 2</option>
+                <option value="User 3">User 3</option>
+                <option value="User 4">User 4</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="slds-form-element slds-m-bottom_medium">
+          <label class="slds-form-element__label" for="status">Status</label>
+          <div class="slds-form-element__control">
+            <div class="slds-select_container">
+              <select id="status" class="slds-select" [(ngModel)]="task.completed" name="completed" required>
+                <option [ngValue]="false">Not Started</option>
+                <option [ngValue]="false">In Progress</option>
+                <option [ngValue]="true">Completed</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="slds-form-element slds-m-bottom_medium">
+          <label class="slds-form-element__label" for="dueDate">Due Date</label>
+          <div class="slds-form-element__control">
+            <input type="date" id="dueDate" class="slds-input" [ngModel]="task.dueDate | date:'yyyy-MM-dd'" (ngModelChange)="task.dueDate = $event" name="dueDate">
+          </div>
+        </div>
+
+        <div class="slds-form-element slds-m-bottom_medium">
+          <label class="slds-form-element__label" for="priority">Priority</label>
+          <div class="slds-form-element__control">
+            <div class="slds-select_container">
+              <select id="priority" class="slds-select" [(ngModel)]="task.priority" name="priority" required>
+                <option value="Low">Low</option>
+                <option value="Normal">Normal</option>
+                <option value="High">High</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="slds-form-element slds-m-bottom_medium">
+          <label class="slds-form-element__label" for="description">Description</label>
+          <div class="slds-form-element__control">
+            <textarea id="description" class="slds-textarea" [(ngModel)]="task.description" name="description"></textarea>
+          </div>
+        </div>
+
+        <div class="slds-grid slds-grid_align-end slds-gap_small">
+          <button type="button" class="slds-button slds-button_neutral" (click)="cancel()">Cancel</button>
+          <button type="submit" class="slds-button slds-button_brand">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div> 

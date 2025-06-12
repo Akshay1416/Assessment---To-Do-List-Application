@@ -1,0 +1,13 @@
+/* confirm-delete-modal.component.css */
+.slds-modal__container {
+    width: 90%;
+    max-width: 30rem;
+}
+
+/* Ensure backdrop is visible for modals */
+.slds-backdrop_open {
+    z-index: 9000;
+}
+.slds-modal {
+    z-index: 9001;
+} 

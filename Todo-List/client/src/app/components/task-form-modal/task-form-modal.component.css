@@ -1,0 +1,9 @@
+/* task-form-modal.component.css */
+.slds-modal__container {
+    width: 90%;
+    max-width: 60rem;
+}
+
+.slds-form-element__label {
+    font-weight: bold;
+} 
