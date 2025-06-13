@@ -30,6 +30,8 @@ export class TaskListComponent implements OnInit {
   currentPage: number = 1;
   itemsPerPage: number = 4; // As shown in screenshot
   totalPages: number = 1;
+  openDropdownId: number | null = null;
+  isLoading: boolean = false;
 
   showTaskFormModal: boolean = false;
   isEditMode: boolean = false;
@@ -45,9 +47,27 @@ export class TaskListComponent implements OnInit {
     this.loadTasks();
   }
 
-  loadTasks(): void {
-    this.allTasks = this.taskService.getTasks();
-    this.applyFiltersAndPagination();
+  async loadTasks(): Promise<void> {
+    try {
+      this.isLoading = true;
+      // Force a complete reload by clearing existing data
+      this.allTasks = [];
+      this.tasks = [];
+      this.filteredTasks = [];
+      
+      // Get fresh data
+      this.allTasks = this.taskService.getTasks();
+      
+      // Reset pagination
+      this.currentPage = 1;
+      
+      // Apply filters and pagination
+      this.applyFiltersAndPagination();
+    } catch (error) {
+      console.error('Error loading tasks:', error);
+    } finally {
+      this.isLoading = false;
+    }
   }
 
   applyFiltersAndPagination(): void {
@@ -136,5 +156,13 @@ export class TaskListComponent implements OnInit {
     this.showDeleteModal = false;
     this.taskIdToDelete = null;
     this.taskTitleToDelete = '';
+  }
+
+  toggleDropdown(taskId: number): void {
+    this.openDropdownId = this.openDropdownId === taskId ? null : taskId;
+  }
+
+  isDropdownOpen(taskId: number): boolean {
+    return this.openDropdownId === taskId;
   }
 } 

@@ -14,8 +14,15 @@
                 <div class="slds-page-header__col-actions">
                     <div class="slds-page-header__actions">
                         <div class="slds-button-group" role="group">
-                            <button class="slds-button slds-button_neutral" (click)="loadTasks()">Refresh</button>
-                            <button class="slds-button slds-button_brand" (click)="openNewTaskModal()">New Task</button>
+                            <button class="slds-button slds-button_neutral" 
+                                    (click)="loadTasks()" 
+                                    [disabled]="isLoading">
+                                <span *ngIf="!isLoading">Refresh</span>
+                                <span *ngIf="isLoading">Refreshing...</span>
+                            </button>
+                            <button class="slds-button slds-button_brand" 
+                                    (click)="openNewTaskModal()"
+                                    [disabled]="isLoading">New Task</button>
                         </div>
                     </div>
                 </div>
@@ -38,7 +45,15 @@
         </div>
 
         <div class="slds-card slds-p-around_medium">
-            <div *ngIf="tasks.length === 0" class="slds-text-align_center slds-text-color_weak slds-p-vertical_large">
+            <div *ngIf="isLoading" class="slds-text-align_center slds-p-vertical_large">
+                <div class="slds-spinner slds-spinner_medium" role="status">
+                    <span class="slds-assistive-text">Loading</span>
+                    <div class="slds-spinner__dot-a"></div>
+                    <div class="slds-spinner__dot-b"></div>
+                </div>
+                <p class="slds-text-align_center slds-m-top_medium">Loading tasks...</p>
+            </div>
+            <div *ngIf="!isLoading && tasks.length === 0" class="slds-text-align_center slds-text-color_weak slds-p-vertical_large">
                 No tasks to display. Start by adding a new task or adjust your search criteria!
             </div>
             <div class="slds-scrollable_x">
@@ -83,8 +98,11 @@
                                 <div class="slds-truncate" title="{{task.description}}">{{task.description}}</div>
                             </td>
                             <td data-label="Actions">
-                                <div class="slds-dropdown-trigger slds-dropdown-trigger_click slds-is-open">
-                                    <button class="slds-button slds-button_icon slds-button_icon-x-small slds-button_icon-border-filled" aria-haspopup="true" title="Show More Actions">
+                                <div class="slds-dropdown-trigger slds-dropdown-trigger_click" [class.slds-is-open]="isDropdownOpen(task.id)">
+                                    <button class="slds-button slds-button_icon slds-button_icon-x-small slds-button_icon-border-filled" 
+                                            aria-haspopup="true" 
+                                            title="Show More Actions"
+                                            (click)="toggleDropdown(task.id)">
                                         <svg class="slds-button__icon" aria-hidden="true">
                                             <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#down"></use>
                                         </svg>
